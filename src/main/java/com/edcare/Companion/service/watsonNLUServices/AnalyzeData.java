@@ -40,6 +40,9 @@ public class AnalyzeData {
                 .limit(3)
                 .build();
 
+        RelationsOptions relations = new RelationsOptions.Builder()
+                .build();
+
 
         Features features = new Features.Builder()
                 .categories(categories)
@@ -47,6 +50,7 @@ public class AnalyzeData {
                 .concepts(concepts)
                 .entities(entities)
                 .keywords(keywords)
+                .relations(relations)
                 .build();
 
         // Build analyze options
