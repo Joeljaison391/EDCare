@@ -12,20 +12,41 @@ public class AnalyzeData {
     private NaturalLanguageUnderstanding naturalLanguageUnderstanding;
 
     public AnalysisResults analyzeText(String content) {
-        // Configure categories options
+
         CategoriesOptions categories = new CategoriesOptions.Builder()
                 .limit(3)
+                .explanation(true)
                 .build();
 
-        // Configure classifications options
+
         ClassificationsOptions classifications = new ClassificationsOptions.Builder()
                 .model("tone-classifications-en-v1")
                 .build();
 
-        // Build features
+        ConceptsOptions concepts = new ConceptsOptions.Builder()
+                .limit(3)
+                .build();
+
+        EntitiesOptions entities = new EntitiesOptions.Builder()
+                .sentiment(true)
+                .emotion(true)
+                .mentions(true)
+                .limit(1)
+                .build();
+
+        KeywordsOptions keywords = new KeywordsOptions.Builder()
+                .sentiment(true)
+                .emotion(true)
+                .limit(3)
+                .build();
+
+
         Features features = new Features.Builder()
                 .categories(categories)
                 .classifications(classifications)
+                .concepts(concepts)
+                .entities(entities)
+                .keywords(keywords)
                 .build();
 
         // Build analyze options
