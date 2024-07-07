@@ -43,6 +43,14 @@ public class AnalyzeData {
         RelationsOptions relations = new RelationsOptions.Builder()
                 .build();
 
+        SummarizationOptions summarization = new SummarizationOptions.Builder()
+                .limit(3)
+                .build();
+
+        SentimentOptions sentiment = new SentimentOptions.Builder()
+                .document(true)
+                .build();
+
 
         Features features = new Features.Builder()
                 .categories(categories)
@@ -51,6 +59,8 @@ public class AnalyzeData {
                 .entities(entities)
                 .keywords(keywords)
                 .relations(relations)
+                .summarization(summarization)
+                .sentiment(sentiment)
                 .build();
 
         // Build analyze options
