@@ -1,6 +1,5 @@
 package com.edcare.Companion.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +24,7 @@ public class UserProfile {
     private String phoneNumber;
 
     private int age;
+    private String gender;
     private String address;
     private String city;
     private String state;
@@ -94,8 +94,6 @@ public class UserProfile {
     // Technological skills and preferences
     @ElementCollection
     private List<String> techSkillLevels;
-    @ElementCollection
-    private Map<String, String> deviceUsages; // e.g., "smartphone": "daily", "tablet": "occasionally"
 
     // Other fields for personalization
     @ElementCollection
