@@ -1,9 +1,6 @@
 package com.edcare.Companion.controller;
 
-
 import com.edcare.Companion.model.UserProfile;
-
-
 import com.edcare.Companion.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,20 +29,20 @@ public class UserProfileController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserProfile> getUserProfileById(@PathVariable Long id) {
+    public ResponseEntity<UserProfile> getUserProfileById(@PathVariable String id) {
         Optional<UserProfile> userProfile = userProfileService.getUserProfileById(id);
         return userProfile.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserProfile> updateUserProfile(@PathVariable Long id, @RequestBody UserProfile userProfileDetails) {
+    public ResponseEntity<UserProfile> updateUserProfile(@PathVariable String id, @RequestBody UserProfile userProfileDetails) {
         Optional<UserProfile> updatedUserProfile = userProfileService.updateUserProfile(id, userProfileDetails);
         return updatedUserProfile.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserProfile(@PathVariable Long id) {
-        boolean isDeleted = userProfileService.deleteUserProfile(id); // Corrected this line
+    public ResponseEntity<Void> deleteUserProfile(@PathVariable String id) {
+        boolean isDeleted = userProfileService.deleteUserProfile(id);
         if (isDeleted) {
             return ResponseEntity.noContent().build();
         } else {

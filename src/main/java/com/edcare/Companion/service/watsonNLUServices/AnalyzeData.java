@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnalyzeData {
 
-    @Autowired
+
     private NaturalLanguageUnderstanding naturalLanguageUnderstanding;
 
-    public AnalysisResults analyzeText(String content) {
+    @Autowired
+    public AnalyzeData(NaturalLanguageUnderstanding naturalLanguageUnderstanding) {
+        this.naturalLanguageUnderstanding = naturalLanguageUnderstanding;
+    }
 
+
+
+    public AnalysisResults analyzeText(String content) {
         CategoriesOptions categories = new CategoriesOptions.Builder()
                 .limit(3)
                 .explanation(true)
                 .build();
-
 
         ClassificationsOptions classifications = new ClassificationsOptions.Builder()
                 .model("tone-classifications-en-v1")
@@ -51,7 +56,6 @@ public class AnalyzeData {
                 .document(true)
                 .build();
 
-
         Features features = new Features.Builder()
                 .categories(categories)
                 .classifications(classifications)
@@ -63,13 +67,11 @@ public class AnalyzeData {
                 .sentiment(sentiment)
                 .build();
 
-        // Build analyze options
         AnalyzeOptions parameters = new AnalyzeOptions.Builder()
                 .text(content)
                 .features(features)
                 .build();
 
-        // Execute analysis
         return naturalLanguageUnderstanding.analyze(parameters).execute().getResult();
     }
 }

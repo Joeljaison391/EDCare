@@ -1,6 +1,5 @@
 package com.edcare.Companion.service;
 
-
 import com.edcare.Companion.model.UserProfile;
 import com.edcare.Companion.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +22,18 @@ public class UserProfileService {
         return userProfileRepository.findAll();
     }
 
-    public Optional<UserProfile> getUserProfileById(Long id) {
+    public Optional<UserProfile> getUserProfileById(String id) {
         return userProfileRepository.findById(id);
     }
 
-    public Optional<UserProfile> updateUserProfile(Long id, UserProfile userProfileDetails) {
+    public Optional<UserProfile> updateUserProfile(String id, UserProfile userProfileDetails) {
         return userProfileRepository.findById(id).map(userProfile -> {
             userProfile.setFirstName(userProfileDetails.getFirstName());
             userProfile.setLastName(userProfileDetails.getLastName());
             userProfile.setEmail(userProfileDetails.getEmail());
             userProfile.setPhoneNumber(userProfileDetails.getPhoneNumber());
             userProfile.setAge(userProfileDetails.getAge());
+            userProfile.setGender(userProfileDetails.getGender());
             userProfile.setAddress(userProfileDetails.getAddress());
             userProfile.setCity(userProfileDetails.getCity());
             userProfile.setState(userProfileDetails.getState());
@@ -69,7 +69,7 @@ public class UserProfileService {
         });
     }
 
-    public boolean deleteUserProfile(Long id) {
+    public boolean deleteUserProfile(String id) {
         return userProfileRepository.findById(id).map(userProfile -> {
             userProfileRepository.delete(userProfile);
             return true;
